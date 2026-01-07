@@ -385,3 +385,77 @@ footer {
         color: white;
     }
 }
+
+.tab-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+
+    button {
+        background: none;
+        border: 1px solid gray;
+        cursor: pointer;
+        padding: 5px 8px;
+        border-radius: 5px;
+    }
+
+    /* hover effect */
+    button:hover {
+        background-color: blue;
+        color: white;
+        border: none;
+    }
+}
+
+.tab-content {
+    display: none !important;
+}
+
+.tab-content.active {
+    display: flex !important;
+}
+
+.tab-btn.active {
+    background-color: blue;
+    color: white;
+    border: none;
+
+}
+
+/* Portfolio Visuals */
+.portfolio-visuals {
+    display: flex; /* Enable flexbox */
+    flex-wrap: wrap; /* Allow items to wrap */
+    justify-content: center; /* Center items horizontally */
+    width: 100%; /* Full width */
+    align-items: center;
+}
+
+.image-container {
+    width: calc(30% - 20px); /* Adjust width to fit horizontally */
+    margin: 10px; /* Space between containers */
+    border-radius: 10px;
+    padding: 1.5%;
+}
+
+.image-container img {
+    width: 100%; /* Make images fill their container */
+    border-radius: 10px; /* Optional: round corners */
+}
+
+iframe {
+    border: none;
+    margin: 15px; 
+    box-shadow: 8px 8px 8px 8px lightgray; 
+    border-radius: 10px; 
+    padding: 10px; 
+}
+
+.image-container:hover,
+iframe:hover {
+    transform: translateY(-10px); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    z-index: 1; 
+}
