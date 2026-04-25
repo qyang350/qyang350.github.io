@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2026 NFL Draft Salaries</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, sans-serif;
+      background: #fafafa;
+      color: #1a1a1a;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 30px;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: #111;
+    }
+
+    .cards {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      flex: 1;
+      min-width: 140px;
+      background: #f0f0ef;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    .card-label {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 4px;
+    }
+
+    .card-value {
+      font-size: 22px;
+      font-weight: 500;
+    }
+
+    .card-sub {
+      font-size: 12px;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .controls span {
+      font-size: 13px;
+      color: #666;
+    }
+
+    .controls button {
+      font-size: 13px;
+      padding: 4px 14px;
+      border-radius: 8px;
+      border: 0.5px solid #bbb;
+      background: #fff;
+      color: #1a1a1a;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .controls button.active {
+      background: #1A73E8;
+      color: #fff;
+      border-color: #1A73E8;
+    }
+
+    .legend {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 10px;
+      font-size: 12px;
+      color: #666;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .legend-swatch {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    .chart-wrap {
+      position: relative;
+      width: 100%;
+      height: 900px;
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 0.5px solid #ececec;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>2026 NFL Draft — Contract Values by Pick</h1>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-label">Top pick total value</div>
+      <div class="card-value">$54.6M</div>
+      <div class="card-sub">Fernando Mendoza (#1)</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Pick #32 total value</div>
+      <div class="card-value">$16.2M</div>
+      <div class="card-sub">Jadarian Price (#32)</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Value gap (1 vs 32)</div>
+      <div class="card-value">$38.4M</div>
+      <div class="card-sub">~3.4× difference</div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <span>View:</span>
+    <button id="btn-total" class="active" onclick="setMode('total')">Total value</button>
+    <button id="btn-yr1"   onclick="setMode('yr1')">Year 1 salary</button>
+    <button id="btn-both"  onclick="setMode('both')">Both</button>
+    <button onclick="exportPDF()" style="margin-left:auto; display:inline-flex; align-items:center; gap:5px;">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 4h14v-2H5v2z"/></svg>
+      Download PDF
+    </button>
+    <button onclick="exportCSV()" style="display:inline-flex; align-items:center; gap:5px;">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6z"/></svg>
+      Download CSV
+    </button>
+  </div>
+
+  <div class="legend">
+    <span class="legend-item" id="leg-total">
+      <span class="legend-swatch" style="background:#1A73E8;"></span>Total value
+    </span>
+    <span class="legend-item" id="leg-yr1" style="display:none;">
+      <span class="legend-swatch" style="background:#0F6E56;"></span>Year 1 salary
+    </span>
+  </div>
+
+  <div class="chart-wrap">
+    <canvas id="draftChart" role="img"
+      aria-label="Horizontal bar chart of 2026 NFL draft pick salaries, picks 1 to 32">
+      2026 NFL Draft pick salaries ranging from $54.6M (pick 1) to $16.2M (pick 32).
+    </canvas>
+  </div>
+
+  <p style="margin-top: 1rem; font-size: 11px; color: #999;">
+    Data source: <a href="https://www.marketwatch.com/story/heres-how-much-money-the-2026-nfl-draft-picks-will-make-and-whos-at-risk-of-losing-millions-e2ddee40?mod=home_lead" target="_blank" style="color: #888; text-decoration: underline;">MarketWatch — Fernando Mendoza to make $54 million as the No. 1 NFL draft pick. Here are the other big winners — and losers.</a>
+  </p>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script>
+    const picks = [
+      [1,  "Fernando Mendoza",   54565500, 9921000],
+      [2,  "David Bailey",       52103630, 9473387],
+      [3,  "Jeremiyah Love",     50537014, 9188548],
+      [4,  "Carnell Tate",       48746540, 8863007],
+      [5,  "Arvell Reese",       45613238, 8293316],
+      [6,  "Mansoor Delane",     40018084, 7276015],
+      [7,  "Sonny Styles",       35541950, 6462173],
+      [8,  "Jordyn Tyson",       31065822, 5648331],
+      [9,  "Spencer Fano",       30841760, 5607593],
+      [10, "Francis Mauigoa",    29611072, 5383831],
+      [11, "Caleb Downs",        27708728, 5037950],
+      [12, "Kadyn Proctor",      25023034, 4549642],
+      [13, "Ty Simpson",         24351620, 4427567],
+      [14, "Olaivavega Ioane",   23232590, 4224107],
+      [15, "Rueben Bain Jr.",    22785000, 4142727],
+      [16, "Kenyon Sadiq",       21442128, 3898569],
+      [17, "Blake Miller",       20994516, 3817185],
+      [18, "Caleb Banks",        20435008, 3715456],
+      [19, "Monroe Freeling",    20099288, 3654416],
+      [20, "Makai Lemon",        19987396, 3634070],
+      [21, "Max Iheanachor",     19875486, 3613725],
+      [22, "Akeem Mesidor",      19651672, 3573031],
+      [23, "Malachi Lawrence",   19427870, 3532340],
+      [24, "KC Concepcion",      18980258, 3450956],
+      [25, "Dillon Thieneman",   18756456, 3410265],
+      [26, "Keylan Rutledge",    18532620, 3369567],
+      [27, "Chris Johnson",      18308844, 3328881],
+      [28, "Caleb Lomu",         18196940, 3308534],
+      [29, "Peter Woods",        17298970, 3145267],
+      [30, "Omar Cooper Jr.",    16823440, 3058807],
+      [31, "Keldric Faulk",      16425104, 2986382],
+      [32, "Jadarian Price",     16168614, 2939748],
+    ];
+
+    const labels = picks.map(p => `#${p[0]} ${p[1]}`);
+    const totals = picks.map(p => +(p[2] / 1e6).toFixed(2));
+    const yr1s   = picks.map(p => +(p[3] / 1e6).toFixed(2));
+
+    // Build a dataset object
+    function makeDataset(data, color, label) {
+      return {
+        label,
+        data,
+        backgroundColor: color,
+        borderRadius: 3,
+        categoryPercentage: 0.75,
+        barPercentage: 0.9,
+      };
+    }
+
+    function getDatasets(mode) {
+      if (mode === 'total') return [makeDataset(totals, '#1A73E8', 'Total value')];
+      if (mode === 'yr1')   return [makeDataset(yr1s,   '#0F6E56', 'Year 1 salary')];
+      return [
+        { ...makeDataset(totals, '#1A73E8', 'Total value'),   barPercentage: 0.5 },
+        { ...makeDataset(yr1s,   '#0F6E56', 'Year 1 salary'), barPercentage: 0.5 },
+      ];
+    }
+
+    // Draw chart once Chart.js is ready
+    let chart;
+
+    function initChart() {
+      if (typeof Chart === 'undefined') { setTimeout(initChart, 100); return; }
+
+      chart = new Chart(document.getElementById('draftChart'), {
+        type: 'bar',
+        data: { labels, datasets: getDatasets('total') },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: ctx => ` $${ctx.parsed.x.toFixed(2)}M`
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: { color: 'rgba(180,180,180,0.25)' },
+              ticks: {
+                font: { size: 11 },
+                color: '#888',
+                callback: v => '$' + v + 'M'
+              }
+            },
+            y: {
+              ticks: { font: { size: 11 }, color: '#555', autoSkip: false },
+              grid: { display: false }
+            }
+          }
+        }
+      });
+    }
+
+    initChart();
+
+    // Toggle logic
+    function setMode(mode) {
+      chart.data.datasets = getDatasets(mode);
+      chart.update();
+
+      // Update button styles
+      ['total', 'yr1', 'both'].forEach(id => {
+        const btn = document.getElementById('btn-' + id);
+        btn.classList.toggle('active', id === mode);
+      });
+
+      // Update legend visibility
+      document.getElementById('leg-total').style.display = mode === 'yr1'   ? 'none' : 'flex';
+      document.getElementById('leg-yr1').style.display   = mode === 'total' ? 'none' : 'flex';
+    }
+
+    window.exportPDF = function() {
+      const { jsPDF } = window.jspdf;
+      html2canvas(document.body, { scale: 2, useCORS: true }).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF({ orientation: 'landscape', unit: 'px', format: [canvas.width / 2, canvas.height / 2] });
+        pdf.addImage(imgData, 'PNG', 0, 0, canvas.width / 2, canvas.height / 2);
+        pdf.save('2026-nfl-draft.pdf');
+      });
+    };
+
+    window.exportCSV = function() {
+      const rows = [
+        ['Draft Pick', 'Player', 'Total Value ($)', 'Year 1 Salary ($)']
+      ];
+      picks.forEach(p => {
+        rows.push([`#${p[0]}`, p[1], p[2], p[3]]);
+      });
+      const csv = rows.map(r => r.join(',')).join('\n');
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = '2026-nfl-draft.csv';
+      a.click();
+      URL.revokeObjectURL(url);
+    };
+  </script>
+
+</body>
+</html>

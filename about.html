@@ -1,277 +1,986 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/Users/qinyang/Documents/GitHub/Personal-Profile/assets/stylesheet.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
-    <title>Qin Yang</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Qin Yang — About</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f9fc;
+      --bg2: #ffffff;
+      --bg3: #eef3fd;
+      --gold: #1A73E8;
+      --gold-light: #1A73E8;
+      --gold-dim: rgba(26,115,232,0.14);
+      --text: #111827;
+      --text-muted: #6b7280;
+      --text-dim: #9ca3af;
+      --border: rgba(26,115,232,0.2);
+      --border-subtle: rgba(0,0,0,0.07);
+      --ff-display: 'Cormorant Garamond', serif;
+      --ff-sans: 'Syne', sans-serif;
+      --ff-mono: 'DM Mono', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--ff-sans);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(248,249,252,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .logo-name a {
+      font-family: var(--ff-display);
+      font-size: 1.4rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      color: var(--gold-light);
+      text-decoration: none;
+    }
+
+    .main-nav {
+      display: flex;
+      gap: 0.25rem;
+    }
+
+    .nav-link {
+      font-family: var(--ff-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 0.4rem 0.9rem;
+      border: 1px solid transparent;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--gold);
+      border-color: var(--border);
+      background: var(--gold-dim);
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .social-icons a {
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--border-subtle);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+
+    .social-icons a:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: var(--gold-dim);
+    }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 5rem 2rem 3rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 2rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .hero-label {
+      font-family: var(--ff-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.1s forwards;
+    }
+
+    .hero-title {
+      font-family: var(--ff-display);
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      font-weight: 300;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      opacity: 0;
+      animation: fadeUp 0.7s 0.2s forwards;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .hero-meta {
+      text-align: right;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.35s forwards;
+    }
+
+    .hero-meta p {
+      font-family: var(--ff-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      line-height: 2;
+    }
+
+    .hero-meta strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* ── MAIN LAYOUT ── */
+    main {
+      position: relative;
+      z-index: 1;
+    }
+
+    .content-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem 6rem;
+    }
+
+    /* ── SECTION SHARED ── */
+    .section {
+      padding: 5rem 0;
+      border-bottom: 1px solid var(--border-subtle);
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .section-num {
+      font-family: var(--ff-mono);
+      font-size: 0.65rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+    }
+
+    .section-title {
+      font-family: var(--ff-display);
+      font-size: 2.4rem;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border-subtle);
+      margin-bottom: 0.35rem;
+    }
+
+    /* ── WHAT I DO ── */
+    .intro-layout {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .intro-description {
+      font-family: var(--ff-display);
+      font-size: 1.35rem;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--text);
+    }
+
+    .intro-description strong {
+      color: var(--gold-light);
+      font-weight: 600;
+    }
+
+    .focus-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 2rem;
+    }
+
+    .focus-pill {
+      font-family: var(--ff-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.8rem;
+      border: 1px solid var(--border);
+      color: var(--gold);
+      background: var(--gold-dim);
+      border-radius: 2px;
+    }
+
+    .intro-sidebar {
+      padding-top: 0.5rem;
+    }
+
+    .sidebar-stat {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .sidebar-stat:first-child { border-top: 1px solid var(--border-subtle); }
+
+    .stat-num {
+      font-family: var(--ff-display);
+      font-size: 2.8rem;
+      font-weight: 300;
+      color: var(--gold-light);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-family: var(--ff-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 0.4rem;
+    }
+
+    /* ── CAREER JOURNEY ── */
+    .career-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .career-item {
+      display: grid;
+      grid-template-columns: 140px 1fr auto;
+      gap: 2rem;
+      align-items: center;
+      padding: 1.8rem 0;
+      border-bottom: 1px solid var(--border-subtle);
+      transition: background 0.2s;
+      position: relative;
+    }
+
+    .career-item::before {
+      content: '';
+      position: absolute;
+      left: -2rem;
+      right: -2rem;
+      top: 0;
+      bottom: 0;
+      background: var(--gold-dim);
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+    }
+
+    .career-item:hover::before { opacity: 1; }
+
+    .career-item.current .career-date-range { color: var(--gold); }
+
+    .career-date-range {
+      font-family: var(--ff-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    .career-role {
+      font-family: var(--ff-sans);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+
+    .career-company {
+      font-family: var(--ff-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    .career-company a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .career-company a:hover { color: var(--gold); }
+
+    .career-location {
+      font-family: var(--ff-mono);
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      text-align: right;
+    }
+
+    .current-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: var(--ff-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: var(--gold-dim);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.5rem;
+      border-radius: 2px;
+      margin-top: 0.5rem;
+    }
+
+    .current-badge::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* ── COMPETENCIES ── */
+    .competency-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border-subtle);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .comp-category {
+      background: var(--bg2);
+      padding: 2.5rem 2rem;
+      transition: background 0.2s;
+    }
+
+    .comp-category:hover {
+      background: var(--bg3);
+    }
+
+    .comp-category h3 {
+      font-family: var(--ff-display);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--gold-light);
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .comp-category ul {
+      list-style: none;
+    }
+
+    .comp-category li {
+      font-family: var(--ff-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border-subtle);
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+
+    .comp-category li:last-child { border-bottom: none; }
+
+    .comp-category:hover li { color: var(--text); }
+
+    /* ── TOOLS ── */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 1px;
+      background: var(--border-subtle);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .tool-item {
+      background: var(--bg2);
+      padding: 1.5rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      transition: background 0.2s;
+      cursor: default;
+    }
+
+    .tool-item:hover {
+      background: var(--bg3);
+    }
+
+    .tool-item img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+      filter: grayscale(0.3) brightness(0.85);
+      transition: filter 0.2s;
+    }
+
+    .tool-item:hover img {
+      filter: grayscale(0) brightness(1);
+    }
+
+    .tool-item p {
+      font-family: var(--ff-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      text-align: center;
+    }
+
+    /* ── CERTIFICATIONS ── */
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .cert-card {
+      background: var(--bg2);
+      border: 1px solid var(--border-subtle);
+      padding: 2rem;
+      transition: border-color 0.2s, background 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cert-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .cert-card:hover {
+      border-color: var(--border);
+      background: var(--bg3);
+    }
+
+    .cert-card:hover::after { opacity: 1; }
+
+    .cert-card img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+      margin-bottom: 1rem;
+      filter: grayscale(0.2);
+    }
+
+    .cert-card h3 {
+      font-family: var(--ff-sans);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+      line-height: 1.35;
+    }
+
+    .cert-card .cert-issuer {
+      font-family: var(--ff-mono);
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+      margin-bottom: 1.25rem;
+    }
+
+    .cert-link {
+      font-family: var(--ff-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: gap 0.2s;
+    }
+
+    .cert-link:hover { gap: 0.6rem; }
+
+    .cert-link::after {
+      content: '→';
+    }
+
+    /* ── EDUCATION ── */
+    .edu-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .edu-item {
+      display: grid;
+      grid-template-columns: 140px 1fr auto;
+      gap: 2rem;
+      align-items: center;
+      padding: 1.8rem 0;
+      border-bottom: 1px solid var(--border-subtle);
+      position: relative;
+    }
+
+    .edu-item::before {
+      content: '';
+      position: absolute;
+      left: -2rem;
+      right: -2rem;
+      top: 0;
+      bottom: 0;
+      background: var(--gold-dim);
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+    }
+
+    .edu-item:hover::before { opacity: 1; }
+
+    .edu-date {
+      font-family: var(--ff-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    .edu-item.current .edu-date { color: var(--gold); }
+
+    .edu-school {
+      font-family: var(--ff-sans);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+
+    .edu-degree {
+      font-family: var(--ff-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    .edu-location {
+      font-family: var(--ff-mono);
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      text-align: right;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 2rem;
+      text-align: center;
+    }
+
+    footer p {
+      font-family: var(--ff-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 800px) {
+      .intro-layout { grid-template-columns: 1fr; gap: 2rem; }
+      .competency-grid { grid-template-columns: 1fr; }
+      .cert-grid { grid-template-columns: 1fr; }
+      .career-item,
+      .edu-item {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }
+      .career-location,
+      .edu-location { text-align: left; }
+      .page-hero { grid-template-columns: 1fr; }
+      .hero-meta { text-align: left; }
+    }
+
+    @media (max-width: 500px) {
+      .tools-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+  </style>
 </head>
 <body>
-    <!-- Navigation Bar -->
-     <header>
-        <div class="name"><a href="home.html">Qin Yang</a></div>
-        <nav class="navbar">
-            <a href="about.html" id="clicked">
-                <img src="assets/imgs/icons8-about-me-50.png" alt="About Me" style="width:20px; height:20px;">
-                About
-            </a>
-            <a href="projects.html">
-                <img src="assets/imgs/icons8-view-quilt-80.png" alt="Projects" style="width:20px; height:20px;">
-                Projects
-            </a>
-            <a href="contact.html">
-                <img src="assets/imgs/icons8-email-50.png" alt="Contact" style="width:20px; height:20px;">
-                Contact
-            </a>
-        </nav>
-        <div class="social-links">
-            <a href="https://github.com/qyang350" target="_blank">
-                <img src="assets/imgs/icons8-github-50.png" alt="GitHub" style="width:30px; height:30px;">
-            </a>
-            <a href="https://www.linkedin.com/in/qin-yang-a0a16521b/" target="_blank">
-                <img src="assets/imgs/icons8-linkedin-50.png" alt="LinkedIn" style="width:30px; height:30px;">
-            </a>
-            <a href="https://www.instagram.com/opal_f_yang/" target="_blank">
-                <img src="assets/imgs/icons8-instagram-logo-50.png" alt="Instagram" style="width:30px; height:30px;">
-            </a>
+
+  <!-- NAV -->
+  <header>
+    <div class="header-inner">
+      <div class="logo-name">
+        <a href="home.html">Qin Yang</a>
+      </div>
+      <nav class="main-nav">
+        <a href="about.html" class="nav-link active">About</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <div class="social-icons">
+        <a href="https://github.com/qyang350" target="_blank" title="GitHub" aria-label="GitHub">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/qin-yang-a0a16521b/" target="_blank" title="LinkedIn" aria-label="LinkedIn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/opal_f_yang/" target="_blank" title="Instagram" aria-label="Instagram">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div>
+      <p class="hero-label">Profile / About</p>
+      <h1 class="hero-title">Data <em>Scientist</em><br>& Builder</h1>
+    </div>
+    <div class="hero-meta">
+      <p><strong>Currently</strong><br>Tractor Supply Co.</p>
+      <p style="margin-top:0.75rem"><strong>Based in</strong><br>Nashville, TN</p>
+      <p style="margin-top:0.75rem"><strong>Studying</strong><br>MS CS · Georgia Tech</p>
+    </div>
+  </div>
+
+  <main>
+    <div class="content-wrapper">
+
+      <!-- WHAT I DO -->
+      <section class="section" id="what-i-do">
+        <div class="section-header">
+          <span class="section-num">01</span>
+          <h2 class="section-title">What I Do</h2>
+          <span class="section-line"></span>
         </div>
-     </header>
-     <!-- Main content goes here -->
-    <main>
-        <section id="what-i-do">
-            <h2 style="font-weight: bold;">What I Do Now</h2>
-            <p>I'm a data scientist specializing in marketing analytics, with a focus on building recommendation systems, personalizing customer experiences, and analyzing consumer behavior. Currently, I work at Tractor Supply Co., where I leverage data to enhance marketing strategies and drive customer engagement.</p>
-        </section>
-        <section id="career-journey">
-            <h2 style="font-weight: bold;">Career Journey</h2>
-            <div class="career-grid">
-                <div id="tsc-data-scientist">
-                    <h3>Data Scientist (Marketing)</h3>
-                    <p><a href="https://www.tractorsupply.com/">Tractor Supply Co.</a> | <span style="opacity: 0.7">Nashville, TN</span></p>
-                    <p style="opacity: 0.7">Jan 2025 - Present | Full-Time</p>
-                </div>
-                <div id="assurant-data-scientist">
-                    <h3>Data Scientist (Global Automation & Engineering)</h3>
-                    <p><a href="https://www.assurant.com/">Assurant</a> | <span style="opacity: 0.7">Nashville, TN</span></p>
-                    <p style="opacity: 0.7">Feb 2023 - Jan 2025| Full-Time</p>
-                </div>
-                <div id="nyu-research-assistant">
-                    <h3>Research Assistant (ASR)</h3>
-                    <p><a href="https://cds.nyu.edu/">Center for Data Science, NYU</a> | <span style="opacity: 0.7">New York City, NY</span></p>
-                    <p style="opacity: 0.7">Sep 2022 - May 2023 | Part-Time</p>
-                </div>
-                <div id="cs-data-scientist">
-                    <h3>Data Scientist (Consulting)</h3>
-                    <p><a href="https://www.campana-schott.com/us/">Campana & Schott</a> | <span style="opacity: 0.7">New York City, NY</span></p>
-                    <p style="opacity: 0.7">May 2022 - Sep 2022 | Internship</p>
-                </div>
+        <div class="intro-layout">
+          <div>
+            <p class="intro-description">
+              I focus on building recommendation systems, personalizing customer experiences, and analyzing consumer behavior.
+              Currently leveraging data at <strong>Tractor Supply Co.</strong> to enhance marketing strategies and drive meaningful customer engagement.
+            </p>
+            <div class="focus-pills">
+              <span class="focus-pill">Recommendation Systems</span>
+              <span class="focus-pill">Personalization</span>
+              <span class="focus-pill">Consumer Behavior</span>
+              <span class="focus-pill">Supply Chain Analytics</span>
+              <span class="focus-pill">A/B Test</span>
+              <span class="focus-pill">Visualization</span>
             </div>
-        </section>
-        <section id="core-competencies">
-            <h2 style="font-weight: bold;">Core Competencies</h2>
-            <ul>
-                <li>Data Analysis</li>
-                <li>Machine Learning</li>
-                <li>Statistical Modeling</li>
-                <li>Data Visualization</li>
-                <li>Marketing Analytics</li>
-                <li>Recommendation Systems</li>
-                <li>A/B Testing</li>
-            </ul>
-        </section>
-        <section id="tools-i-use">
-            <h2 style="font-weight: bold;">Tools I Use</h2>
-            <div class="tools-grid">
-                <div>
-                    <img src="assets/imgs/icons8-html-5-96.png" style="height: 64px;">
-                    <p>HTML</p>
-                </div>
-                <div>
-                    <img src="assets/imgs/icons8-python-96.png" style="height: 64px;">
-                    <p>Python</p>
-                </div>
-                <div>
-                    <img src="assets/imgs/icons8-github-96.png" style="height: 64px;">
-                    <p>GitHub</p>
-                </div>
-                <div>
-                    <img src="assets/imgs/icons8-css3-96.png" style="height: 64px;">
-                    <p>CSS</p>
-                </div>
-                <div>
-                    <img src="assets/imgs/icons8-mysql-logo-96.png" style="height: 64px;">
-                    <p>MySQL</p>
-                </div>
-                <div>
-                    <img src="assets/imgs/icons8-visual-studio-code-2019-96.png" style="height: 64px;">
-                    <p>VS Code</p>
-                </div>
-                <div>
-                    <img src="assets/imgs/icons8-microsoft-excel-2019-96.png" style="height: 64px;">
-                    <p>Excel</p>
-                </div>
-                <div>
-                    <img src="assets/imgs/icons8-microsoft-powerpoint-96.png" style="height: 64px;">
-                    <p>PPT</p>
-                </div>
-                <div>
-                    <img src="assets/imgs/icons8-docker-96.png" style="height: 64px;">
-                    <p>Docker</p>
-                </div>
-                <div>
-                    <img src="assets/imgs/icons8-chatgpt-96.png" style="height: 64px;">
-                    <p>ChatGPT</p>
-                </div>
-                <div>
-                    <img src="assets/imgs/icons8-azure-96.png" style="height: 64px;">
-                    <p>Azure</p>
-                </div>
-                <div>
-                    <img src="assets/imgs/icons8-django-96.png" style="height: 64px;">
-                    <p>Django</p>
-                </div>
-                <div>
-                    <img src="assets/imgs/icons8-flask-100.png" style="height: 64px;">
-                    <p>Flask</p>
-                </div>
-                <div>
-                    <img src="assets/imgs/icons8-jira-96.png" style="height: 64px;">
-                    <p>Jira</p>
-                </div>
-                <div>
-                    <img src="assets/imgs/icons8-matplotlib-96.png" style="height: 64px;">
-                    <p>Matplotlib</p>
-                </div>
-                <div>
-                    <img src="assets/imgs/icons8-mongodb-96.png" style="height: 64px;">
-                    <p>MongoDB</p>
-                </div>
-                <div>
-                    <img src="assets/imgs/icons8-postgresql-96.png" style="height: 64px;">
-                    <p>PostgreSQL</p>
-                </div>
-                <div>
-                    <img src="assets/imgs/icons8-power-bi-2021-96.png" style="height: 64px;">
-                    <p>Power BI</p>
-                </div>
-                <div>
-                    <img src="assets/imgs/icons8-rest-api-100.png" style="height: 64px;">
-                    <p>REST API</p>
-                </div>
-                <div>
-                    <img src="assets/imgs/icons8-snowflake-94.png" style="height: 64px;">
-                    <p>Snowflake</p>
-                </div>
-                <div>
-                    <img src="assets/imgs/icons8-streamlit-96.png" style="height: 64px;">
-                    <p>Streamlit</p>
-                </div>
+          </div>
+          <div class="intro-sidebar">
+            <div class="sidebar-stat">
+              <div class="stat-num">3+</div>
+              <div class="stat-label">Years in Industry</div>
             </div>
-        </section>
-        <section id="certifications">
-            <h2 style="font-weight: bold;">Certifications</h2>
+            <div class="sidebar-stat">
+              <div class="stat-num">4</div>
+              <div class="stat-label">Degrees Earned</div>
+            </div>
+            <div class="sidebar-stat">
+              <div class="stat-num">3</div>
+              <div class="stat-label">Certifications</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CAREER JOURNEY -->
+      <section class="section" id="career-journey">
+        <div class="section-header">
+          <span class="section-num">02</span>
+          <h2 class="section-title">Career Journey</h2>
+          <span class="section-line"></span>
+        </div>
+        <div class="career-list">
+
+          <div class="career-item current">
+            <div class="career-date-range">Jan 2025<br>Present</div>
             <div>
-                <div id="certificate">
-                    <h3>
-                        <img src="assets/imgs/icons8-power-bi-2021-96.png" alt="Power BI Logo" style="width:30px; height:30px; vertical-align:middle; margin-right:6px;">
-                        Power BI Data Analyst Associate
-                    </h3>
-                    <a href="https://learn.microsoft.com/en-us/users/yangqin-9115/credentials/882cb83aa916bb2c" style="text-decoration:none;">
-                        <button>
-                            <img src="assets/imgs/icons8-external-link-50.png" alt="Show credential" style="width:20px; height:20px; vertical-align:middle; margin-right:6px;">
-                            Show credential
-                        </button>
-                    </a>
-                </div>
-                <div id="certificate">
-                    <h3>
-                        <img src="assets/imgs/snowflake.png" alt="Snowflake Logo" style="width:30px; height:30px; vertical-align:middle; margin-right:6px;">
-                        SnowPro Core Certificate
-                    </h3>
-                    <a href="https://achieve.snowflake.com/372d819d-d7f3-4396-bee8-6fe7831b6d14#acc.HWFtnwcZ" style="text-decoration:none;">
-                        <button>
-                            <img src="assets/imgs/icons8-external-link-50.png" alt="Show credential" style="width:20px; height:20px; vertical-align:middle; margin-right:6px;">
-                            Show credential
-                        </button>
-                    </a>
-                </div>
-                <div id="certificate">
-                    <h3>
-                        <img src="assets/imgs/icons8-azure-96.png" alt="Azure Logo" style="width:30px; height:30px; vertical-align:middle; margin-right:6px;">
-                        Azure Data Scientist Associate
-                    </h3>
-                    <a href="https://www.credly.com/users/qin-yang.fada8e9a/badges#credly" style="text-decoration:none;">
-                        <button>
-                            <img src="assets/imgs/icons8-external-link-50.png" alt="Show credential" style="width:20px; height:20px; vertical-align:middle; margin-right:6px;">
-                            Show credential
-                        </button>
-                    </a>
-                </div>
+              <div class="career-role">Data Scientist — Marketing</div>
+              <div class="career-company"><a href="https://www.tractorsupply.com/" target="_blank">Tractor Supply Co.</a></div>
+              <span class="current-badge">Current Role</span>
             </div>
-        </section>
-        <section id="education">
-            <h2 style="font-weight: bold;">Education</h2>
-            <div class="education-grid">
-                <div id="gatech-ms">
-                    <div class="school-logo">
-                        <img src="assets/imgs/gatech-cs.jpg" alt="Georgia Tech MS in Computer Science" style="width:80px; border-radius:10px;">
-                    </div>
-                    <div class="program-details">
-                        <h3>MS in Computer Science (Ongoing)</h3>
-                        <p><i>Georgia Institute of Technology</i></p>
-                        <p style="opacity: 0.7">August 2025 - Present | Atlanta, GA</p>
-                    </div>
-                </div>
-                <div id="nyu-ms">
-                    <div class="school-logo">
-                        <img src="assets/imgs/nyu-courant.jpg" alt="NYU MS in Data Science" style="width:80px; border-radius:10px;">
-                    </div>
-                    <div class="program-details">
-                        <h3>MS in Data Science</h3>
-                        <p><i>New York University</i></p>
-                        <p style="opacity: 0.7">Sep 2021 - May 2023 | New York, NY</p>
-                    </div>
-                </div>
-                <div id="sd-ms">
-                    <div class="school-logo">
-                        <img src="assets/imgs/sdu.png" alt="Shandong University MS in Economics" style="width:80px; border-radius:10px;">
-                    </div>
-                    <div class="program-details">
-                        <h3>MS in Economics</h3>
-                        <p><i>Shandong University</i></p>
-                        <p style="opacity: 0.7">Sep 2018 - July 2021 | China</p>
-                    </div>
-                </div>
-                <div id="sd-finance-econ-bachelor">
-                    <div class="school-logo">
-                        <img src="assets/imgs/sdu-ef.png" alt="Shandong University of Finance & Economics" style="width:80px; border-radius:10px;">
-                    </div>
-                    <div class="program-details">
-                        <h3>BS in Management Science & Engineering</h3>
-                        <p><i>Shandong University of Finance & Economics</i></p>
-                        <p style="opacity: 0.7">Sep 2014 - July 2018 | China</p>
-                    </div>
-                </div>
-        </section>
-        <!-- <section id="outside-work">
-            <h2 style="font-weight: bold;">Outside of Work</h2>
-            <div class="photos-grid">
-                <img src="assets/imgs/photo-1.png" alt="Hiking">
-                <img src="assets/imgs/photo-2.png" alt="Chongqing">
-                <img src="assets/imgs/photo-3.jpg" alt="Riley">
-                <img src="assets/imgs/photo-4.JPG">
-                <img src="assets/imgs/photo-5.jpg">
-                <img src="assets/imgs/photo-6.JPG">
-                <img src="assets/imgs/photo-7.jpg">
-                <img src="assets/imgs/photo-8.png">
+            <div class="career-location">Brentwood, TN</div>
+          </div>
+
+          <div class="career-item">
+            <div class="career-date-range">Feb 2023<br>Jan 2025</div>
+            <div>
+              <div class="career-role">Data Scientist — Global Automation & Engineering</div>
+              <div class="career-company"><a href="https://www.assurant.com/" target="_blank">Assurant</a></div>
             </div>
-        </section> -->
-    </main>
-    <footer>
-        <p>&copy; 2025 Qin Yang. All rights reserved.</p>
-    </footer>
+            <div class="career-location">Nashville, TN</div>
+          </div>
+
+          <div class="career-item">
+            <div class="career-date-range">Sep 2022<br>May 2023</div>
+            <div>
+              <div class="career-role">Research Assistant — ASR</div>
+              <div class="career-company"><a href="https://cds.nyu.edu/" target="_blank">Center for Data Science, NYU</a></div>
+            </div>
+            <div class="career-location">New York City, NY</div>
+          </div>
+
+          <div class="career-item">
+            <div class="career-date-range">May 2022<br>Sep 2022</div>
+            <div>
+              <div class="career-role">Data Scientist — Consulting</div>
+              <div class="career-company"><a href="https://www.campana-schott.com/us/" target="_blank">Campana & Schott</a></div>
+            </div>
+            <div class="career-location">New York City, NY</div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- CORE COMPETENCIES -->
+      <section class="section" id="core-competencies">
+        <div class="section-header">
+          <span class="section-num">03</span>
+          <h2 class="section-title">Core Competencies</h2>
+          <span class="section-line"></span>
+        </div>
+        <div class="competency-grid">
+          <div class="comp-category">
+            <h3>Analytics &amp; Strategy</h3>
+            <ul>
+              <li>Marketing Analytics</li>
+              <li>Data Analysis</li>
+              <li>Data Visualization</li>
+            </ul>
+          </div>
+          <div class="comp-category">
+            <h3>Machine Learning</h3>
+            <ul>
+              <li>Recommendation Systems</li>
+              <li>Machine Learning</li>
+              <li>Statistical Modeling</li>
+            </ul>
+          </div>
+          <div class="comp-category">
+            <h3>Growth &amp; Testing</h3>
+            <ul>
+              <li>A/B Testing</li>
+              <li>Consumer Behavior</li>
+              <li>Personalization</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- TOOLS -->
+      <section class="section" id="tools-i-use">
+        <div class="section-header">
+          <span class="section-num">04</span>
+          <h2 class="section-title">Tools I Use</h2>
+          <span class="section-line"></span>
+        </div>
+        <div class="tools-grid">
+          <div class="tool-item"><img src="assets/imgs/icons8-python-96.png" alt="Python"><p>Python</p></div>
+          <div class="tool-item"><img src="assets/imgs/icons8-html-5-96.png" alt="HTML"><p>HTML</p></div>
+          <div class="tool-item"><img src="assets/imgs/icons8-css3-96.png" alt="CSS"><p>CSS</p></div>
+          <div class="tool-item"><img src="assets/imgs/icons8-github-96.png" alt="GitHub"><p>GitHub</p></div>
+          <div class="tool-item"><img src="assets/imgs/icons8-snowflake-94.png" alt="Snowflake"><p>Snowflake</p></div>
+          <div class="tool-item"><img src="assets/imgs/icons8-azure-96.png" alt="Azure"><p>Azure</p></div>
+          <div class="tool-item"><img src="assets/imgs/icons8-power-bi-2021-96.png" alt="Power BI"><p>Power BI</p></div>
+          <div class="tool-item"><img src="assets/imgs/icons8-postgresql-96.png" alt="PostgreSQL"><p>PostgreSQL</p></div>
+          <div class="tool-item"><img src="assets/imgs/icons8-mongodb-96.png" alt="MongoDB"><p>MongoDB</p></div>
+          <div class="tool-item"><img src="assets/imgs/icons8-docker-96.png" alt="Docker"><p>Docker</p></div>
+          <div class="tool-item"><img src="assets/imgs/icons8-streamlit-96.png" alt="Streamlit"><p>Streamlit</p></div>
+          <div class="tool-item"><img src="assets/imgs/icons8-flask-100.png" alt="Flask"><p>Flask</p></div>
+          <div class="tool-item"><img src="assets/imgs/icons8-django-96.png" alt="Django"><p>Django</p></div>
+          <div class="tool-item"><img src="assets/imgs/icons8-rest-api-100.png" alt="REST API"><p>REST API</p></div>
+          <div class="tool-item"><img src="assets/imgs/icons8-matplotlib-96.png" alt="Matplotlib"><p>Matplotlib</p></div>
+          <div class="tool-item"><img src="assets/imgs/icons8-microsoft-excel-2019-96.png" alt="Excel"><p>Excel</p></div>
+          <div class="tool-item"><img src="assets/imgs/icons8-microsoft-powerpoint-96.png" alt="PPT"><p>PPT</p></div>
+          <div class="tool-item"><img src="assets/imgs/icons8-jira-96.png" alt="Jira"><p>Jira</p></div>
+          <div class="tool-item"><img src="assets/imgs/icons8-chatgpt-96.png" alt="ChatGPT"><p>ChatGPT</p></div>
+          <div class="tool-item"><img src="assets/imgs/icons8-visual-studio-code-96.png" alt="VS Code"><p>VS Code</p></div>
+          <div class="tool-item"><img src="assets/imgs/icons8-sql-96.png" alt="SQL"><p>SQL</p></div>
+          <div class="tool-item"><img src="assets/imgs/databricks_logo_icon_170295.webp" alt="Databricks"><p>Databricks</p></div>
+        </div>
+      </section>
+
+      <!-- CERTIFICATIONS -->
+      <section class="section" id="certifications">
+        <div class="section-header">
+          <span class="section-num">05</span>
+          <h2 class="section-title">Certifications</h2>
+          <span class="section-line"></span>
+        </div>
+        <div class="cert-grid">
+          <div class="cert-card">
+            <img src="assets/imgs/icons8-power-bi-2021-96.png" alt="Power BI">
+            <h3>Power BI Data Analyst Associate</h3>
+            <p class="cert-issuer">Microsoft</p>
+            <a href="https://learn.microsoft.com/en-us/users/yangqin-9115/credentials/882cb83aa916bb2c" target="_blank" class="cert-link">View Credential</a>
+          </div>
+          <div class="cert-card">
+            <img src="assets/imgs/snowflake.png" alt="Snowflake">
+            <h3>SnowPro Core Certificate</h3>
+            <p class="cert-issuer">Snowflake</p>
+            <a href="https://achieve.snowflake.com/372d819d-d7f3-4396-bee8-6fe7831b6d14#acc.HWFtnwcZ" target="_blank" class="cert-link">View Credential</a>
+          </div>
+          <div class="cert-card">
+            <img src="assets/imgs/icons8-azure-96.png" alt="Azure">
+            <h3>Azure Data Scientist Associate</h3>
+            <p class="cert-issuer">Microsoft</p>
+            <a href="https://www.credly.com/users/qin-yang.fada8e9a/badges#credly" target="_blank" class="cert-link">View Credential</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- EDUCATION -->
+      <section class="section" id="education">
+        <div class="section-header">
+          <span class="section-num">06</span>
+          <h2 class="section-title">Education</h2>
+          <span class="section-line"></span>
+        </div>
+        <div class="edu-list">
+
+          <div class="edu-item current">
+            <div class="edu-date">Aug 2025<br>Present</div>
+            <div>
+              <div class="edu-school">Georgia Institute of Technology</div>
+              <div class="edu-degree">MS in Computer Science</div>
+              <span class="current-badge">In Progress</span>
+            </div>
+            <div class="edu-location">Atlanta, GA</div>
+          </div>
+
+          <div class="edu-item">
+            <div class="edu-date">Sep 2021<br>May 2023</div>
+            <div>
+              <div class="edu-school">New York University</div>
+              <div class="edu-degree">MS in Data Science</div>
+            </div>
+            <div class="edu-location">New York, NY</div>
+          </div>
+
+          <div class="edu-item">
+            <div class="edu-date">Sep 2018<br>July 2021</div>
+            <div>
+              <div class="edu-school">Shandong University</div>
+              <div class="edu-degree">MS in Economics</div>
+            </div>
+            <div class="edu-location">China</div>
+          </div>
+
+          <div class="edu-item">
+            <div class="edu-date">Sep 2014<br>July 2018</div>
+            <div>
+              <div class="edu-school">Shandong University of Finance &amp; Economics</div>
+              <div class="edu-degree">BS in Management Science &amp; Engineering</div>
+            </div>
+            <div class="edu-location">China</div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Qin Yang — All rights reserved</p>
+  </footer>
+
+  <script>
+    // Intersection Observer for scroll reveals
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.section').forEach(s => observer.observe(s));
+  </script>
 </body>
 </html>
