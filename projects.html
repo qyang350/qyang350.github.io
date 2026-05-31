@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
   <style>
     :root {
       --bg: #f8f9fc;
@@ -336,7 +337,308 @@
     @media (max-width: 700px) {
       .gallery-grid { grid-template-columns: 1fr; }
     }
-  </style>
+
+    /* ── ML GRID ── */
+    .ml-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .ml-card-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    .ml-card-body-left {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .ml-card {
+      background: var(--bg2);
+      border: 1px solid var(--border-subtle);
+      border-radius: 4px;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+      opacity: 0;
+      animation: fadeUp 0.5s forwards;
+    }
+
+    .ml-card:nth-child(1) { animation-delay: 0.05s; }
+    .ml-card:nth-child(2) { animation-delay: 0.12s; }
+    .ml-card:nth-child(3) { animation-delay: 0.19s; }
+    .ml-card:nth-child(4) { animation-delay: 0.26s; }
+    .ml-card:nth-child(5) { animation-delay: 0.33s; }
+    .ml-card:nth-child(6) { animation-delay: 0.40s; }
+
+    .ml-card:hover {
+      border-color: var(--border);
+      box-shadow: 0 6px 28px rgba(26,115,232,0.09);
+      transform: translateY(-2px);
+    }
+
+    .ml-card-header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .ml-card-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+    .ml-card-number {
+      font-family: var(--ff-mono);
+      font-size: 0.6rem;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+      padding-top: 2px;
+    }
+
+    .ml-card-title {
+      font-family: var(--ff-display);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .ml-card-dataset {
+      font-family: var(--ff-mono);
+      font-size: 0.63rem;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .ml-card-desc {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    .ml-card-approach {
+      border-left: 2px solid var(--border);
+      padding-left: 0.85rem;
+    }
+
+    .ml-card-approach-label {
+      font-family: var(--ff-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 0.35rem;
+    }
+
+    .ml-card-approach-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .ml-card-approach-list li {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      padding-left: 0.75rem;
+      position: relative;
+    }
+
+    .ml-card-approach-list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--blue);
+      font-size: 0.7rem;
+    }
+
+    /* ── SCORECARD VISUALS ── */
+    .ml-scorecard {
+      background: var(--bg3);
+      border: 1px solid var(--border-subtle);
+      border-radius: 3px;
+      padding: 0.85rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      flex: 1;
+    }
+
+    .ml-scorecard-label {
+      font-family: var(--ff-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .ml-kpi-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem;
+    }
+
+    .ml-kpi {
+      background: var(--bg2);
+      border: 1px solid var(--border-subtle);
+      border-radius: 2px;
+      padding: 0.6rem 0.75rem;
+    }
+
+    .ml-kpi-val {
+      font-family: var(--ff-mono);
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--blue);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+
+    .ml-kpi-desc {
+      font-family: var(--ff-mono);
+      font-size: 0.58rem;
+      color: var(--text-dim);
+      letter-spacing: 0.04em;
+      line-height: 1.4;
+    }
+
+    .ml-bar-row { display: flex; flex-direction: column; gap: 0.5rem; }
+
+    .ml-bar-item { display: flex; flex-direction: column; gap: 0.2rem; }
+
+    .ml-bar-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .ml-bar-name {
+      font-family: var(--ff-mono);
+      font-size: 0.6rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+
+    .ml-bar-pct {
+      font-family: var(--ff-mono);
+      font-size: 0.6rem;
+      color: var(--blue);
+      letter-spacing: 0.04em;
+    }
+
+    .ml-bar-track {
+      height: 5px;
+      background: rgba(26,115,232,0.1);
+      border-radius: 1px;
+      overflow: hidden;
+    }
+
+    .ml-bar-fill {
+      height: 100%;
+      background: var(--blue);
+      border-radius: 1px;
+      opacity: 0.65;
+    }
+
+    .ml-bar-fill.accent { opacity: 1; }
+    .ml-bar-fill.dim    { opacity: 0.3; }
+
+    .ml-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+      padding-top: 0.5rem;
+      border-top: 1px solid var(--border-subtle);
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .ml-card-status {
+      font-family: var(--ff-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--text-dim);
+    }
+
+    .ml-card-status .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--text-dim);
+    }
+
+    .ml-card-status.in-progress .dot { background: #f59e0b; }
+    .ml-card-status.complete .dot { background: #10b981; }
+
+    .ml-card-links { display: flex; gap: 1rem; align-items: center; }
+
+    .ml-card-links a {
+      font-family: var(--ff-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+
+    .ml-card-links a:hover { border-bottom-color: var(--blue); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 700px) {
+      .gallery-grid { grid-template-columns: 1fr; }
+      .ml-card-body { grid-template-columns: 1fr; }
+    }
+
+    .kpi-row { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
+    .kpi { background: var(--bg2); border: 1px solid var(--border-subtle); border-radius: 2px; padding: .55rem .7rem; }
+    .kpi-val { font-family: var(--ff-mono); font-size: 1.05rem; font-weight: 500; color: var(--blue); line-height: 1; margin-bottom: .2rem; }
+    .kpi-desc { font-family: var(--ff-mono); font-size: .55rem; color: var(--text-dim); line-height: 1.4; }
+    
+    .charts-section { display: flex; flex-direction: column; gap: .6rem; flex: 1; }
+    .charts-label { font-family: var(--ff-mono); font-size: .55rem; letter-spacing: .18em; text-transform: uppercase; color: var(--text-dim); }
+    .charts-duo { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; flex: 1; }
+    .chart-block { display: flex; flex-direction: column; gap: .35rem; flex: 1; min-height: 0;}
+    .chart-block-title { font-family: var(--ff-mono); font-size: .58rem; letter-spacing: .12em; text-transform: uppercase; color: var(--text-muted); padding: .3rem .5rem; background: var(--bg2); border: 1px solid var(--border-subtle); border-radius: 2px; text-align: center; } 
+
+    .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+    .industry-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .ind-tag { font-family: var(--ff-mono); font-size: .58rem; letter-spacing: .08em; text-transform: uppercase; padding: .28rem .6rem; border-radius: 2px; border: 1px solid; }
+    .ind-tag.marketing { color: #712B13; background: #FAECE7; border-color: #F0997B; }
+    .ind-tag.retail    { color: #085041; background: #E1F5EE; border-color: #5DCAA5; }
+    .ind-tag.ecomm     { color: #3C3489; background: #EEEDFE; border-color: #AFA9EC; }
+    .ind-tag.finserv   { color: #633806; background: #FAEEDA; border-color: #EF9F27; }
+
+    .use-cases-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; }
+    .use-case-item { background: #ffffff; border: 1px solid var(--border-subtle); border-radius: 3px; padding: .6rem .75rem; display: flex; flex-direction: column; gap: .25rem; }
+    .use-case-icon { font-size: 14px; color: var(--blue); }
+    .use-case-title { font-family: var(--ff-mono); font-size: .6rem; font-weight: 500; color: var(--text); letter-spacing: .04em; }
+    .use-case-desc { font-family: var(--ff-mono); font-size: .55rem; color: var(--text-dim); line-height: 1.5; }
+
+    .footer-left { display: flex; flex-direction: column; gap: .4rem; }
+    .stack-label { font-family: var(--ff-mono); font-size: .55rem; letter-spacing: .15em; text-transform: uppercase; color: var(--text-dim); }
+    .stack-logos { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
+    .stack-logo { display: flex; align-items: center; gap: .3rem; font-family: var(--ff-mono); font-size: .6rem; color: var(--text-muted); }
+    .footer-right { display: flex; align-items: center; gap: 1rem; }
+
+</style>
 </head>
 <body>
 
@@ -415,16 +717,17 @@
     <div class="tab-panel" id="panel-powerbi">
       <div class="panel-header">
         <h2 class="panel-title">Power BI Practice</h2>
-        <p class="panel-sub">Interactive dashboards built for marketing and retail analytics.</p>
+        <p class="panel-sub">Interactive dashboards across various domains.</p>
       </div>
       <div class="powerbi-wrapper">
         <iframe 
           class="powerbi-frame"
-          width="89%"
           title="AB Test - Homepage Hero Redesign" 
-          src="https://app.powerbi.com/view?r=eyJrIjoiZGYxODkyODItYzhlZC00ODQ5LWJkYTItNjBmZTliYTdjOTJiIiwidCI6IjRhYzIyODBjLTgyY2YtNGU2Yi1iMDQzLTY1NzIwOTA2MWMzZiJ9" 
+          width="89%" 
+          src="https://app.powerbi.com/view?r=eyJrIjoiZTBlMDg4NDctYjZiMy00MGE3LTkzNTctZTE4ODQzNWQxYTc0IiwidCI6IjRhYzIyODBjLTgyY2YtNGU2Yi1iMDQzLTY1NzIwOTA2MWMzZiJ9&pageName=0f7b69b60eed246768f7" 
           frameborder="0" 
           allowFullScreen="true">
+        </iframe>
         </iframe>
         <div class="powerbi-caption">
           <span class="tool-tag">A/B Test</span>
@@ -448,7 +751,8 @@
         <iframe 
           class="powerbi-frame"
           title="WorldSSP Ranking" 
-          src="https://app.powerbi.com/view?r=eyJrIjoiNTdmODcwZWYtOGJkYy00NmViLWIwNDgtZGNmMjIzZTdjZDMxIiwidCI6IjRhYzIyODBjLTgyY2YtNGU2Yi1iMDQzLTY1NzIwOTA2MWMzZiJ9&pageName=502adb3fed9f2c184cab" 
+          width="89%"
+          src="https://app.powerbi.com/view?r=eyJrIjoiNTdmODcwZWYtOGJkYy00NmViLWIwNDgtZGNmMjIzZTdjZDMxIiwidCI6IjRhYzIyODBjLTgyY2YtNGU2Yi1iMDQzLTY1NzIwOTA2MWMzZiJ9&pageName=3f97315d48667b6be631" 
           frameborder="0" 
           allowFullScreen="true">
         </iframe>
@@ -497,10 +801,157 @@
     <div class="tab-panel" id="panel-ml">
       <div class="panel-header">
         <h2 class="panel-title">Machine Learning</h2>
-        <p class="panel-sub">Models, experiments, and research projects.</p>
+        <p class="panel-sub">A collection of end-to-end machine learning projects across various domains.</p>
       </div>
-      <div class="ml-empty">
-        <p>Projects coming soon.</p>
+      <div class="ml-grid">
+
+      <!-- Card 1 — Purchase Propensity Model -->
+      <div class="ml-card">
+
+        <div class="card-top">
+          <div class="industry-tags">
+            <span class="ind-tag marketing">Marketing</span>
+            <span class="ind-tag retail">Retail</span>
+            <span class="ind-tag ecomm">E-commerce</span>
+            <span class="ind-tag finserv">Financial services</span>
+          </div>
+          <span class="ml-card-number">01</span>
+        </div>
+
+        <div>
+          <h3 class="ml-card-title">Purchase Propensity Model</h3>
+          <p class="ml-card-dataset">Platform: Databricks + Unity Catalog · Binary Classification · Synthetic Data</p>
+        </div>
+
+        <div class="ml-card-body">
+          <div class="ml-card-body-left">
+            <p class="ml-card-desc">End-to-end MLOps pipeline that predicts the probability of a customer purchasing within the next 30 days. Built on Databricks with automated hyperparameter search and batch scoring at scale.</p>
+
+            <div class="ml-card-approach">
+              <p class="ml-card-approach-label">Approach</p>
+              <ul class="ml-card-approach-list">
+                <li>Leakage-controlled feature engineering with null imputation</li>
+                <li>Hyperopt TPE search over learning rate, depth, estimators</li>
+                <li>Fitted Spark pipeline persisted to Unity Catalog Volume</li>
+                <li>Batch scoring with model health validation before inference</li>
+              </ul>
+            </div>
+
+            <div>
+              <p class="ml-card-approach-label" style="margin-bottom:.4rem;">Use cases</p>
+              <div class="use-cases-row">
+                <div class="use-case-item">
+                  <i class="ti ti-mail use-case-icon" aria-hidden="true"></i>
+                  <span class="use-case-title">Campaign targeting</span>
+                  <span class="use-case-desc">Focus email and paid spend on high-propensity segments</span>
+                </div>
+                <div class="use-case-item">
+                  <i class="ti ti-discount use-case-icon" aria-hidden="true"></i>
+                  <span class="use-case-title">Promo optimization</span>
+                  <span class="use-case-desc">Suppress discounts for customers likely to buy anyway</span>
+                </div>
+                <div class="use-case-item">
+                  <i class="ti ti-users use-case-icon" aria-hidden="true"></i>
+                  <span class="use-case-title">Retention outreach</span>
+                  <span class="use-case-desc">Trigger win-back flows for low-propensity at-risk customers</span>
+                </div>
+                <div class="use-case-item">
+                  <i class="ti ti-chart-bar use-case-icon" aria-hidden="true"></i>
+                  <span class="use-case-title">Inventory planning</span>
+                  <span class="use-case-desc">Anticipate demand by scoring buyer likelihood ahead of season</span>
+                </div>
+                <div class="use-case-item">
+                  <i class="ti ti-credit-card use-case-icon" aria-hidden="true"></i>
+                  <span class="use-case-title">Credit pre-approval</span>
+                  <span class="use-case-desc">Surface BNPL offers to customers at the point of intent</span>
+                </div>
+                <div class="use-case-item">
+                  <i class="ti ti-refresh use-case-icon" aria-hidden="true"></i>
+                  <span class="use-case-title">Churn prevention</span>
+                  <span class="use-case-desc">Route low-score subscribers to retention-focused journeys</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ml-scorecard">
+            <p class="ml-scorecard-label">Model performance</p>
+            <div class="kpi-row">
+              <div class="kpi"><div class="kpi-val">0.78</div><div class="kpi-desc">ROC-AUC val set</div></div>
+              <div class="kpi"><div class="kpi-val">74%</div><div class="kpi-desc">accuracy val set</div></div>
+              <div class="kpi"><div class="kpi-val">0.54</div><div class="kpi-desc">F1 score</div></div>
+              <div class="kpi"><div class="kpi-val">4.1×</div><div class="kpi-desc">lift @ decile 1</div></div>
+            </div>
+            <div class="charts-section">
+              <p class="charts-label">Diagnostics</p>
+              <div class="charts-duo">
+                <div class="chart-block">
+                  <div class="chart-block-title">Cumulative lift</div>
+                  <div style="position:relative; flex:1; min-height:120px;">
+                    <canvas id="liftChart"></canvas>
+                  </div>
+                </div>
+
+                <div class="chart-block">
+                  <div class="chart-block-title">Feature importance</div>
+                  <div style="position:relative; flex:1; min-height:120px;">
+                    <canvas id="featChart"></canvas>
+                  </div>
+                </div>
+              </div>
+              <div style="display:flex;gap:12px;margin-top:2px;">
+                <span style="display:flex;align-items:center;gap:4px;font-family:var(--ff-mono);font-size:.55rem;color:var(--text-dim);">
+                  <span style="width:10px;height:2px;background:#1A73E8;display:inline-block;"></span>Model
+                </span>
+                <span style="display:flex;align-items:center;gap:4px;font-family:var(--ff-mono);font-size:.55rem;color:var(--text-dim);">
+                  <span style="width:10px;height:2px;background:#9ca3af;display:inline-block;"></span>Random
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ml-card-footer">
+          <div class="footer-left">
+            <span class="stack-label">Built with</span>
+            <div class="stack-logos">
+              <span class="stack-logo">
+                <svg width="18" height="18" viewBox="0 0 128 128" aria-hidden="true"><path fill="#3776AB" d="M63.391 1.988c-4.222.02-8.252.379-11.8 1.007-10.45 1.846-12.346 5.71-12.346 12.837v9.411h24.693v3.137H29.977c-7.176 0-13.46 4.313-15.426 12.521-2.268 9.405-2.368 15.275 0 25.096 1.755 7.311 5.947 12.519 13.124 12.519h8.491V67.234c0-8.151 7.051-15.34 15.426-15.34h24.665c6.866 0 12.346-5.654 12.346-12.548V15.833c0-6.693-5.646-11.72-12.346-12.837-4.244-.706-8.645-1.027-12.866-1.008zM50.037 9.557c2.55 0 4.634 2.117 4.634 4.721 0 2.593-2.083 4.69-4.634 4.69-2.56 0-4.633-2.097-4.633-4.69-.001-2.604 2.073-4.721 4.633-4.721z"/><path fill="#FFD43B" d="M91.682 28.38v10.966c0 8.5-7.208 15.655-15.426 15.655H51.591c-6.756 0-12.346 5.783-12.346 12.549v23.515c0 6.691 5.818 10.628 12.346 12.547 7.816 2.297 15.312 2.713 24.665 0 6.216-1.801 12.346-5.423 12.346-12.547v-9.412H63.938v-3.138h37.012c7.176 0 9.852-5.005 12.348-12.519 2.578-7.735 2.467-15.174 0-25.096-1.774-7.145-5.161-12.521-12.348-12.521h-9.268zM77.809 87.927c2.561 0 4.634 2.097 4.634 4.692 0 2.602-2.074 4.719-4.634 4.719-2.55 0-4.633-2.117-4.633-4.719 0-2.595 2.083-4.692 4.633-4.692z"/></svg>
+                Python
+              </span>
+              <span class="stack-logo">
+                <svg width="18" height="18" viewBox="0 0 64 64" aria-hidden="true"><path fill="#E25A1C" d="M32 4L58 19.5V44.5L32 60L6 44.5V19.5L32 4Z"/><path fill="#fff" d="M32 18L50 28V42L32 52L14 42V28L32 18Z" opacity=".85"/><path fill="#E25A1C" d="M32 28L42 34V40L32 46L22 40V34L32 28Z"/></svg>
+                PySpark
+              </span>
+              <span class="stack-logo">
+                <svg width="18" height="18" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="6" fill="#189AB4"/><text x="32" y="42" text-anchor="middle" font-family="monospace" font-weight="700" font-size="19" fill="white">XGB</text></svg>
+                XGBoost
+              </span>
+              <span class="stack-logo">
+                <svg width="18" height="18" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="6" fill="#0194E2"/><path d="M32 12C21.23 12 12.5 20.73 12.5 31.5S21.23 51 32 51C38.92 51 45.13 47.28 48.15 41.54L40.82 37.45C39.26 40.26 36.35 42.15 33 42.15C27.53 42.15 23.1 37.72 23.1 32.25S27.53 22.35 33 22.35C36.35 22.35 39.26 24.24 40.82 27.05L48.15 22.96C45.13 17.22 38.92 13.5 32 13.5" fill="white"/></svg>
+                MLflow
+              </span>
+              <span class="stack-logo">
+                <svg width="18" height="18" viewBox="0 0 64 64" aria-hidden="true"><path fill="#FF3621" d="M32 4L60 20V44L32 60L4 44V20L32 4Z"/><path fill="white" d="M20 31L32 24L44 31L32 38L20 31Z"/><line x1="32" y1="38" x2="32" y2="52" stroke="white" stroke-width="2"/><line x1="20" y1="31" x2="20" y2="45" stroke="white" stroke-width="2"/><line x1="44" y1="31" x2="44" y2="45" stroke="white" stroke-width="2"/><line x1="20" y1="45" x2="32" y2="52" stroke="white" stroke-width="2"/><line x1="44" y1="45" x2="32" y2="52" stroke="white" stroke-width="2"/></svg>
+                Databricks
+              </span>
+            </div>
+          </div>
+          <div class="footer-right">
+            <span class="ml-card-status complete"><span class="dot"></span>Complete</span>
+            <div class="ml-card-links">
+              <a href="https://github.com/qyang350/Machine-Learning-Case-Study/tree/main/Purchase%20Propensity%20Model" target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                GitHub →
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+        <!-- repeat for each project -->
+
       </div>
     </div>
 
@@ -525,5 +976,31 @@
       iframe.contentWindow.exportPDF();
     }
   </script>
+  <script>
+    let chartsInitialized = false;
+
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+
+        if (btn.dataset.tab === 'ml' && !chartsInitialized) {
+          initCharts();
+          chartsInitialized = true;
+        }
+      });
+    });
+
+    function handleDownload(e) {
+      e.preventDefault();
+      const iframe = document.querySelector('#panel-charts iframe');
+      iframe.contentWindow.exportPDF();
+    }
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <script src="assets/js/ml-charts.js"></script>
 </body>
 </html>
