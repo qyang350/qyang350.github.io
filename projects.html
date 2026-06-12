@@ -270,6 +270,16 @@
     }
 
     /* ── POWER BI PANEL ── */
+    .powerbi-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+    }
+
+    @media (max-width: 700px) {
+      .powerbi-grid { grid-template-columns: 1fr; }
+    }
+
     .powerbi-wrapper {
       background: var(--bg2);
       border: 1px solid var(--border-subtle);
@@ -283,18 +293,19 @@
     }
 
     .powerbi-frame {
-      aspect-ratio: 16/11;
+      aspect-ratio: 16/10;
       width: 100%;
       display: block;
       border: none;
     }
 
     .powerbi-caption {
-      padding: 1.25rem 1.5rem;
+      padding: 0.65rem 0.9rem;
       border-top: 1px solid var(--border-subtle);
       display: flex;
-      gap: 0.5rem;
+      gap: 0.4rem;
       align-items: center;
+      flex-wrap: wrap;
     }
 
     /* ── ML SECTION ── */
@@ -717,8 +728,9 @@
     <div class="tab-panel" id="panel-powerbi">
       <div class="panel-header">
         <h2 class="panel-title">Power BI Practice</h2>
-        <p class="panel-sub">Interactive dashboards across various domains.</p>
+        <p class="panel-sub">Interactive dashboards/components across various domains.</p>
       </div>
+      <div class="powerbi-grid">
       <div class="powerbi-wrapper">
         <iframe 
           class="powerbi-frame"
@@ -745,6 +757,7 @@
         </iframe>
         <div class="powerbi-caption">
           <span class="tool-tag">Supply Chain</span>
+          <span class="tool-tag">Manufacturing</span>
         </div>
       </div>
       <div class="powerbi-wrapper">
@@ -760,6 +773,21 @@
           <span class="tool-tag">Inventory Management</span>
           <span class="tool-tag">Retail</span>
           <span class="tool-tag">Customer Insights</span>
+        </div>
+      </div>
+      <div class="powerbi-wrapper">
+        <iframe 
+          class="powerbi-frame"
+          title="Sales Funnel" 
+          width="89%" 
+          src="https://app.powerbi.com/view?r=eyJrIjoiNGY1NmE1NDgtZTUwYS00YzBmLTg4YjItMDUyM2IzMTJlMzdhIiwidCI6IjRhYzIyODBjLTgyY2YtNGU2Yi1iMDQzLTY1NzIwOTA2MWMzZiJ9" 
+          frameborder="0" 
+          allowFullScreen="true">
+        </iframe>
+        <div class="powerbi-caption">
+          <span class="tool-tag">E-Commerce</span>
+          <span class="tool-tag">Customer Journey</span>
+          <span class="tool-tag">Marketing Analytics</span>
         </div>
       </div>
       <div class="powerbi-wrapper">
@@ -788,6 +816,7 @@
           <span class="tool-tag">Retail</span>
         </div>
       </div>
+      </div><!-- end powerbi-grid -->
     </div>
 
     <!-- PANEL: Interactive Charts -->
