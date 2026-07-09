@@ -272,40 +272,185 @@
     /* ── POWER BI PANEL ── */
     .powerbi-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    /* ── POWER BI SLIDESHOW ── */
+    .powerbi-slideshow {
+      position: relative;
+    }
+
+    .powerbi-slide-track {
+      position: relative;
+    }
+
+    .powerbi-slide {
+      display: none;
+    }
+
+    .powerbi-slide.active {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .powerbi-slide-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       gap: 1.25rem;
+      margin-top: 1.25rem;
     }
 
-    @media (max-width: 700px) {
-      .powerbi-grid { grid-template-columns: 1fr; }
+    .powerbi-arrow-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      color: var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, transform 0.15s;
     }
 
-    .powerbi-wrapper {
+    .powerbi-arrow-btn:hover {
+      background: var(--blue-dim);
+      border-color: var(--blue);
+    }
+
+    .powerbi-arrow-btn:active {
+      transform: scale(0.94);
+    }
+
+    .powerbi-arrow-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .powerbi-slide-counter {
+      font-family: var(--ff-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+      min-width: 3.5em;
+      text-align: center;
+    }
+
+    .powerbi-card {
       background: var(--bg2);
       border: 1px solid var(--border-subtle);
+      border-radius: 4px;
       overflow: hidden;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1.75rem;
+      transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+      opacity: 0;
+      animation: fadeUp 0.5s forwards;
     }
 
-    .powerbi-wrapper:hover {
+    .powerbi-card:nth-child(1) { animation-delay: 0.05s; }
+    .powerbi-card:nth-child(2) { animation-delay: 0.12s; }
+    .powerbi-card:nth-child(3) { animation-delay: 0.19s; }
+    .powerbi-card:nth-child(4) { animation-delay: 0.26s; }
+    .powerbi-card:nth-child(5) { animation-delay: 0.33s; }
+    .powerbi-card:nth-child(6) { animation-delay: 0.40s; }
+    .powerbi-card:nth-child(7) { animation-delay: 0.47s; }
+
+    .powerbi-card:hover {
       border-color: var(--border);
-      box-shadow: 0 4px 24px rgba(26,115,232,0.08);
+      box-shadow: 0 6px 28px rgba(26,115,232,0.09);
+      transform: translateY(-2px);
+    }
+
+    .powerbi-card-header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+
+    .powerbi-card-header > div {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    .powerbi-card-title {
+      font-family: var(--ff-display);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    .powerbi-card-title-row {
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.5rem;
+    }
+
+    .powerbi-card-title-row .powerbi-card-title {
+      margin-bottom: 0;
+    }
+
+    .type-tag {
+      font-family: var(--ff-mono);
+      font-size: 0.56rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.55rem;
+      border-radius: 2px;
+      border: 1px solid;
+      white-space: nowrap;
+      position: relative;
+      top: -0.1em;
+    }
+
+    .type-tag.case-study {
+      color: #1558b0;
+      background: var(--blue-dim);
+      border-color: var(--border);
+    }
+
+    .type-tag.component {
+      color: #6b4f9e;
+      background: #F2EEFA;
+      border-color: #C9B8E8;
+    }
+
+    .powerbi-card-desc {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    .powerbi-card-divider {
+      border-top: 1px solid var(--border-subtle);
+      margin: 0.5rem -1.75rem 0;
+    }
+
+    .powerbi-frame-wrapper {
+      border-radius: 0 0 4px 4px;
+      overflow: hidden;
+      height: 650px;
+      margin: 0 -1.75rem -1.75rem;
     }
 
     .powerbi-frame {
-      aspect-ratio: 16/10;
       width: 100%;
+      height: 100%;
       display: block;
       border: none;
-    }
-
-    .powerbi-caption {
-      padding: 0.65rem 0.9rem;
-      border-top: 1px solid var(--border-subtle);
-      display: flex;
-      gap: 0.4rem;
-      align-items: center;
-      flex-wrap: wrap;
     }
 
     /* ── ML SECTION ── */
@@ -684,7 +829,7 @@
   <main>
     <!-- TABS -->
     <div class="tab-bar">
-      <button class="tab-btn active" data-tab="visuals">Static Visuals</button>
+      <!-- <button class="tab-btn active" data-tab="visuals">Static Visuals</button> -->
       <button class="tab-btn" data-tab="powerbi">Power BI Practice</button>
       <!-- <button class="tab-btn" data-tab="charts">Interactive Charts</button> -->
       <button class="tab-btn" data-tab="ml">Machine Learning</button>
@@ -692,7 +837,7 @@
     </div>
 
     <!-- PANEL: Example Visuals -->
-    <div class="tab-panel active" id="panel-visuals">
+    <!-- <div class="tab-panel active" id="panel-visuals">
       <div class="panel-header">
         <h2 class="panel-title">Static Visuals</h2>
         <p class="panel-sub">A collection of professional charts and data storytelling.</p>
@@ -723,115 +868,222 @@
           <div class="gallery-caption"><span class="tool-tag">PPT</span></div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- PANEL: Power BI -->
-    <div class="tab-panel" id="panel-powerbi">
+    <div class="tab-panel active" id="panel-powerbi">
       <div class="panel-header">
         <h2 class="panel-title">Power BI Practice</h2>
         <p class="panel-sub">Interactive dashboards/components across various domains.</p>
       </div>
-      <div class="powerbi-grid">
-      <div class="powerbi-wrapper">
-        <iframe 
-          class="powerbi-frame"
-          title="AB Test - Homepage Hero Redesign" 
-          width="89%" 
-          src="https://app.powerbi.com/view?r=eyJrIjoiZTBlMDg4NDctYjZiMy00MGE3LTkzNTctZTE4ODQzNWQxYTc0IiwidCI6IjRhYzIyODBjLTgyY2YtNGU2Yi1iMDQzLTY1NzIwOTA2MWMzZiJ9&pageName=0f7b69b60eed246768f7" 
-          frameborder="0" 
-          allowFullScreen="true">
-        </iframe>
-        </iframe>
-        <div class="powerbi-caption">
-          <span class="tool-tag">A/B Test</span>
-          <span class="tool-tag">Marketing Analytics</span>
+      <div class="powerbi-slideshow">
+      <div class="powerbi-slide-track" id="powerbi-slide-track">
+
+      <!-- Slide 1 — A/B Test Dashboard -->
+      <div class="powerbi-slide active" data-slide-index="0">
+      <div class="powerbi-card">
+        <div class="powerbi-card-header">
+          <div>
+            <div class="powerbi-card-title-row">
+              <h3 class="powerbi-card-title">A/B Test — Homepage Hero Redesign</h3>
+              <span class="type-tag case-study">Case Study</span>
+            </div>
+            <p class="powerbi-card-desc">Experiment readout comparing a redesigned homepage hero against the control, tracking conversion and engagement lift across the test window.</p>
+          </div>
+          <span class="ml-card-number">01</span>
+        </div>
+        <div class="powerbi-card-divider"></div>
+        <div class="powerbi-frame-wrapper">
+          <iframe
+            class="powerbi-frame"
+            title="AB Test - Homepage Hero Redesign"
+            src="https://app.powerbi.com/view?r=eyJrIjoiZTBlMDg4NDctYjZiMy00MGE3LTkzNTctZTE4ODQzNWQxYTc0IiwidCI6IjRhYzIyODBjLTgyY2YtNGU2Yi1iMDQzLTY1NzIwOTA2MWMzZiJ9&pageName=0f7b69b60eed246768f7"
+            frameborder="0"
+            allowFullScreen="true">
+          </iframe>
         </div>
       </div>
-      <div class="powerbi-wrapper">
-        <iframe 
-          class="powerbi-frame"
-          title="Sales Performance Overview" 
-          width="89%"  
-          src="https://app.powerbi.com/view?r=eyJrIjoiMzNkZGVlYTUtMzU1NC00MjI4LTljOTctMjM3Zjg0M2E2YTg5IiwidCI6IjRhYzIyODBjLTgyY2YtNGU2Yi1iMDQzLTY1NzIwOTA2MWMzZiJ9&pageName=e8240338b3ccc83ec907" 
-          frameborder="0" 
-          allowFullScreen="true">
-        </iframe>
-        <div class="powerbi-caption">
-          <span class="tool-tag">Sales</span>
-          <span class="tool-tag">Drill-Down</span>
+      </div>
+
+      <!-- Card 2 — Sales Performance Overview -->
+      <!-- <div class="powerbi-card">
+        <div class="powerbi-card-header">
+          <div>
+            <div class="powerbi-card-title-row">
+              <h3 class="powerbi-card-title">Sales Performance Overview</h3>
+              <span class="type-tag component">Component</span>
+            </div>
+            <p class="powerbi-card-desc">Overview page for total sales, orders, AOV, and profit margin — hover any metric to reveal region- and category-level detail, showcasing tooltip-driven drill-down.</p>
+          </div>
+          <span class="ml-card-number">02</span>
+        </div>
+        <div class="powerbi-card-divider"></div>
+        <div class="powerbi-frame-wrapper">
+          <iframe
+            class="powerbi-frame"
+            title="Sales Performance Overview"
+            src="https://app.powerbi.com/view?r=eyJrIjoiMzNkZGVlYTUtMzU1NC00MjI4LTljOTctMjM3Zjg0M2E2YTg5IiwidCI6IjRhYzIyODBjLTgyY2YtNGU2Yi1iMDQzLTY1NzIwOTA2MWMzZiJ9&pageName=e8240338b3ccc83ec907"
+            frameborder="0"
+            allowFullScreen="true">
+          </iframe>
+        </div>
+      </div> -->
+
+      <!-- Slide 2 — Supply Chain Performance Dashboard -->
+      <div class="powerbi-slide" data-slide-index="1">
+      <div class="powerbi-card">
+        <div class="powerbi-card-header">
+          <div>
+            <div class="powerbi-card-title-row">
+              <h3 class="powerbi-card-title">Supply Chain Performance Dashboard</h3>
+              <span class="type-tag case-study">Case Study</span>
+            </div>
+            <p class="powerbi-card-desc">End-to-end visibility into manufacturing throughput, fulfillment, and supplier performance for operations stakeholders.</p>
+          </div>
+          <span class="ml-card-number">03</span>
+        </div>
+        <div class="powerbi-card-divider"></div>
+        <div class="powerbi-frame-wrapper">
+          <iframe
+            class="powerbi-frame"
+            title="Supply Chain Performance Dashboard"
+            src="https://app.powerbi.com/view?r=eyJrIjoiNzk4NTkzNjgtYTZjNC00MzMyLWE1N2UtMDg2MTlhZThjNmFlIiwidCI6IjRhYzIyODBjLTgyY2YtNGU2Yi1iMDQzLTY1NzIwOTA2MWMzZiJ9&pageName=dd350e998b84291347a0"
+            frameborder="0"
+            allowFullScreen="true">
+          </iframe>
         </div>
       </div>
-      <div class="powerbi-wrapper">
-        <iframe 
-          class="powerbi-frame"
-          width="89%"
-          title="Supply Chain Performance Dashboard" 
-          src="https://app.powerbi.com/view?r=eyJrIjoiNzk4NTkzNjgtYTZjNC00MzMyLWE1N2UtMDg2MTlhZThjNmFlIiwidCI6IjRhYzIyODBjLTgyY2YtNGU2Yi1iMDQzLTY1NzIwOTA2MWMzZiJ9&pageName=dd350e998b84291347a0" 
-          frameborder="0" 
-          allowFullScreen="true">
-        </iframe>
-        <div class="powerbi-caption">
-          <span class="tool-tag">Supply Chain</span>
-          <span class="tool-tag">Manufacturing</span>
+      </div>
+
+      <!-- Slide 3 — Marketing Campaign Performance Dashboard -->
+      <div class="powerbi-slide" data-slide-index="1">
+      <div class="powerbi-card">
+        <div class="powerbi-card-header">
+          <div>
+            <div class="powerbi-card-title-row">
+              <h3 class="powerbi-card-title">Marketing Campaign Performance Dashboard</h3>
+              <span class="type-tag case-study">Case Study</span>
+            </div>
+            <p class="powerbi-card-desc">Real-time insights into campaign effectiveness, audience engagement, and conversion metrics for marketing teams.</p>
+          </div>
+          <span class="ml-card-number">03</span>
+        </div>
+        <div class="powerbi-card-divider"></div>
+        <div class="powerbi-frame-wrapper">
+          <iframe 
+            class="powerbi-frame"
+            title="Marketing Campaign Performance v3" 
+            src="https://app.powerbi.com/view?r=eyJrIjoiNTUwYjZlNDItNjE5MS00MjhmLWI0ODQtMzNhODM3NmZlMzYxIiwidCI6IjRhYzIyODBjLTgyY2YtNGU2Yi1iMDQzLTY1NzIwOTA2MWMzZiJ9" 
+            frameborder="0" 
+            allowFullScreen="true">
+          </iframe>
+          </iframe>
         </div>
       </div>
-      <div class="powerbi-wrapper">
-        <iframe 
-          class="powerbi-frame"
-          title="Retail Dashboard" 
-          width="89%" 
-          src="https://app.powerbi.com/view?r=eyJrIjoiMmI4ZDAwNGUtNmM3MC00ZjY4LTg1YjUtNTVkYWQ5ZWJiMjdhIiwidCI6IjRhYzIyODBjLTgyY2YtNGU2Yi1iMDQzLTY1NzIwOTA2MWMzZiJ9" 
-          frameborder="0" 
-          allowFullScreen="true">
-        </iframe>
-        <div class="powerbi-caption">
-          <span class="tool-tag">Inventory Management</span>
-          <span class="tool-tag">Retail</span>
-          <span class="tool-tag">Customer Insights</span>
-        </div>
       </div>
-      <div class="powerbi-wrapper">
-        <iframe 
-          class="powerbi-frame"
-          title="Sales Funnel" 
-          width="89%" 
-          src="https://app.powerbi.com/view?r=eyJrIjoiNGY1NmE1NDgtZTUwYS00YzBmLTg4YjItMDUyM2IzMTJlMzdhIiwidCI6IjRhYzIyODBjLTgyY2YtNGU2Yi1iMDQzLTY1NzIwOTA2MWMzZiJ9" 
-          frameborder="0" 
-          allowFullScreen="true">
-        </iframe>
-        <div class="powerbi-caption">
-          <span class="tool-tag">E-Commerce</span>
-          <span class="tool-tag">Customer Journey</span>
-          <span class="tool-tag">Marketing Analytics</span>
+      <!-- Card 4 — Retail Dashboard -->
+      <!-- <div class="powerbi-card">
+        <div class="powerbi-card-header">
+          <div>
+            <div class="powerbi-card-title-row">
+              <h3 class="powerbi-card-title">Retail Dashboard</h3>
+              <span class="type-tag case-study">Case Study</span>
+            </div>
+            <p class="powerbi-card-desc">Inventory and customer insight rollup for retail operations, combining stock health with shopper behavior signals.</p>
+          </div>
+          <span class="ml-card-number">04</span>
         </div>
-      </div>
-      <div class="powerbi-wrapper">
-        <iframe 
-          class="powerbi-frame"
-          title="WorldSSP Ranking" 
-          width="89%"
-          src="https://app.powerbi.com/view?r=eyJrIjoiNTdmODcwZWYtOGJkYy00NmViLWIwNDgtZGNmMjIzZTdjZDMxIiwidCI6IjRhYzIyODBjLTgyY2YtNGU2Yi1iMDQzLTY1NzIwOTA2MWMzZiJ9&pageName=3f97315d48667b6be631" 
-          frameborder="0" 
-          allowFullScreen="true">
-        </iframe>
-        <div class="powerbi-caption">
-          <span class="tool-tag">Sports</span>
+        <div class="powerbi-card-divider"></div>
+        <div class="powerbi-frame-wrapper">
+          <iframe
+            class="powerbi-frame"
+            title="Retail Dashboard"
+            src="https://app.powerbi.com/view?r=eyJrIjoiMmI4ZDAwNGUtNmM3MC00ZjY4LTg1YjUtNTVkYWQ5ZWJiMjdhIiwidCI6IjRhYzIyODBjLTgyY2YtNGU2Yi1iMDQzLTY1NzIwOTA2MWMzZiJ9"
+            frameborder="0"
+            allowFullScreen="true">
+          </iframe>
         </div>
-      </div>
-      <div class="powerbi-wrapper">
-        <iframe 
-          class="powerbi-frame"
-          title="Weekly Marketing Intelligence" 
-          src="https://app.powerbi.com/view?r=eyJrIjoiNDU3ZTM2YmUtNzMxNy00MmY2LTk1YWItZmMxNDJiYzYwNWM1IiwidCI6IjRhYzIyODBjLTgyY2YtNGU2Yi1iMDQzLTY1NzIwOTA2MWMzZiJ9&pageName=d7914093327303a024cb" 
-          frameborder="0" 
-          allowFullScreen="true">
-        </iframe>
-        <div class="powerbi-caption">
-          <span class="tool-tag">Marketing Analytics</span>
-          <span class="tool-tag">Retail</span>
+      </div> -->
+
+      <!-- Card 5 — Sales Funnel -->
+      <!-- <div class="powerbi-card">
+        <div class="powerbi-card-header">
+          <div>
+            <div class="powerbi-card-title-row">
+              <h3 class="powerbi-card-title">Sales Funnel</h3>
+              <span class="type-tag component">Component</span>
+            </div>
+            <p class="powerbi-card-desc">Customer journey breakdown from first touch to purchase, highlighting drop-off points across the e-commerce funnel.</p>
+          </div>
+          <span class="ml-card-number">05</span>
         </div>
+        <div class="powerbi-card-divider"></div>
+        <div class="powerbi-frame-wrapper">
+          <iframe
+            class="powerbi-frame"
+            title="Sales Funnel"
+            src="https://app.powerbi.com/view?r=eyJrIjoiNGY1NmE1NDgtZTUwYS00YzBmLTg4YjItMDUyM2IzMTJlMzdhIiwidCI6IjRhYzIyODBjLTgyY2YtNGU2Yi1iMDQzLTY1NzIwOTA2MWMzZiJ9"
+            frameborder="0"
+            allowFullScreen="true">
+          </iframe>
+        </div>
+      </div> -->
+
+      <!-- Card 6 — WorldSSP Ranking -->
+      <!-- <div class="powerbi-card">
+        <div class="powerbi-card-header">
+          <div>
+            <h3 class="powerbi-card-title">WorldSSP Ranking</h3>
+            <p class="powerbi-card-desc">Season standings and rider performance tracker for the World Supersport championship.</p>
+          </div>
+          <span class="ml-card-number">06</span>
+        </div>
+        <div class="powerbi-card-divider"></div>
+        <div class="powerbi-frame-wrapper">
+          <iframe
+            class="powerbi-frame"
+            title="WorldSSP Ranking"
+            src="https://app.powerbi.com/view?r=eyJrIjoiNTdmODcwZWYtOGJkYy00NmViLWIwNDgtZGNmMjIzZTdjZDMxIiwidCI6IjRhYzIyODBjLTgyY2YtNGU2Yi1iMDQzLTY1NzIwOTA2MWMzZiJ9&pageName=3f97315d48667b6be631"
+            frameborder="0"
+            allowFullScreen="true">
+          </iframe>
+        </div>
+      </div> -->
+
+      <!-- Card 7 — Weekly Marketing Intelligence -->
+      <!-- <div class="powerbi-card">
+        <div class="powerbi-card-header">
+          <div>
+            <h3 class="powerbi-card-title">Weekly Marketing Intelligence</h3>
+            <p class="powerbi-card-desc">Recurring retail marketing snapshot summarizing weekly performance trends for fast decision-making.</p>
+          </div>
+          <span class="ml-card-number">07</span>
+        </div>
+        <div class="powerbi-card-divider"></div>
+        <div class="powerbi-frame-wrapper">
+          <iframe
+            class="powerbi-frame"
+            title="Weekly Marketing Intelligence"
+            src="https://app.powerbi.com/view?r=eyJrIjoiNDU3ZTM2YmUtNzMxNy00MmY2LTk1YWItZmMxNDJiYzYwNWM1IiwidCI6IjRhYzIyODBjLTgyY2YtNGU2Yi1iMDQzLTY1NzIwOTA2MWMzZiJ9&pageName=d7914093327303a024cb"
+            frameborder="0"
+            allowFullScreen="true">
+          </iframe>
+        </div>
+      </div> -->
+
+      </div><!-- end powerbi-slide-track -->
+
+      <div class="powerbi-slide-nav">
+        <button class="powerbi-arrow-btn" id="powerbi-prev" aria-label="Previous dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <span class="powerbi-slide-counter" id="powerbi-counter">1 / 2</span>
+        <button class="powerbi-arrow-btn" id="powerbi-next" aria-label="Next dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
       </div>
-      </div><!-- end powerbi-grid -->
+
+      </div><!-- end powerbi-slideshow -->
     </div>
 
     <!-- PANEL: Interactive Charts -->
@@ -1169,6 +1421,47 @@
       const iframe = document.querySelector('#panel-charts iframe');
       iframe.contentWindow.exportPDF();
     }
+  </script>
+  <script>
+    // ── POWER BI SLIDESHOW ──
+    (function () {
+      const slides = Array.from(document.querySelectorAll('#powerbi-slide-track .powerbi-slide'));
+      const counterEl = document.getElementById('powerbi-counter');
+      const prevBtn = document.getElementById('powerbi-prev');
+      const nextBtn = document.getElementById('powerbi-next');
+      if (!slides.length || !prevBtn || !nextBtn) return;
+
+      let current = slides.findIndex(s => s.classList.contains('active'));
+      if (current === -1) current = 0;
+
+      function showSlide(index) {
+        slides.forEach(s => s.classList.remove('active'));
+        slides[index].classList.add('active');
+        if (counterEl) counterEl.textContent = (index + 1) + ' / ' + slides.length;
+        current = index;
+      }
+
+      prevBtn.addEventListener('click', () => {
+        showSlide((current - 1 + slides.length) % slides.length);
+      });
+
+      nextBtn.addEventListener('click', () => {
+        showSlide((current + 1) % slides.length);
+      });
+
+      // Left/Right arrow key navigation, only while the Power BI tab is visible
+      document.addEventListener('keydown', (e) => {
+        const panel = document.getElementById('panel-powerbi');
+        if (!panel || !panel.classList.contains('active')) return;
+        if (e.key === 'ArrowLeft') {
+          prevBtn.click();
+        } else if (e.key === 'ArrowRight') {
+          nextBtn.click();
+        }
+      });
+
+      showSlide(current);
+    })();
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
